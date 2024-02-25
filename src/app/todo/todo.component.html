@@ -1,1 +1,20 @@
-<p>todo works!</p>
+<div>
+  <ul>
+    <li *ngFor="let post of todos()">
+      {{ post.title }}
+      <button (click)="deleteTodo(post.id)">Delete</button>
+    </li>
+  </ul>
+
+  <div>
+    <form [formGroup]="todoForm">
+      <input
+        type="text"
+        formControlName="title"
+        name="title"
+        placeholder="Title"
+      />
+      <button (click)="addOrUpdateTodo()">Add</button>
+    </form>
+  </div>
+</div>

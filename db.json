@@ -1,6 +1,8 @@
 {
   "posts": [
-    { "id": "1", "title": "a title" },
-    { "id": "2", "title": "another title" }
+    {
+      "title": "dcsc",
+      "id": 1
+    }
   ]
 }

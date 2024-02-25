@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
-interface IPost {
+export interface IPost {
   id?: number;
   title: string;
 }
@@ -24,6 +24,7 @@ export class TodoService {
   }
 
   createPost(post: IPost): Observable<IPost> {
+    delete post.id;
     return this.http
       .post<IPost>('http://localhost:3000/posts', post)
       .pipe(tap(this._upsertTodo));
@@ -35,14 +36,12 @@ export class TodoService {
       .pipe(tap(this._upsertTodo));
   }
 
-  deletePost(post: IPost): Observable<IPost> {
-    return this.http
-      .delete<IPost>(`http://localhost:3000/posts/${post.id}`)
-      .pipe(
-        tap((_) => {
-          this.todos.set(this.todos().filter((todo) => todo.id !== post.id));
-        })
-      );
+  deletePost(id: number): Observable<IPost> {
+    return this.http.delete<IPost>(`http://localhost:3000/posts/${id}`).pipe(
+      tap((_) => {
+        this.todos.set(this.todos().filter((todo) => todo.id !== id));
+      })
+    );
   }
 
   private _upsertTodo = (post: IPost) => {
