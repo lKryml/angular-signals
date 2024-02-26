@@ -42,7 +42,7 @@ export class TodoComponent {
       .updatePost(todo)
       .pipe(take(1))
       .subscribe(() => {
-        this.todoForm.reset();
+        this.todoForm.reset({ id: -1 });
       });
   }
 
@@ -51,8 +51,12 @@ export class TodoComponent {
       .createPost(todo)
       .pipe(take(1))
       .subscribe(() => {
-        this.todoForm.reset();
+        this.todoForm.reset({ id: -1 });
       });
+  }
+
+  editTodo(todo: IPost) {
+    this.todoForm.patchValue(todo);
   }
 
   // this.todoForm.value.id === -1

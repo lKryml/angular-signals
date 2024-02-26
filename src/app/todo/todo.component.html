@@ -3,6 +3,7 @@
     <li *ngFor="let post of todos()">
       {{ post.title }}
       <button (click)="deleteTodo(post.id)">Delete</button>
+      <button (click)="editTodo(post)">Edit</button>
     </li>
   </ul>
 
@@ -14,7 +15,9 @@
         name="title"
         placeholder="Title"
       />
-      <button (click)="addOrUpdateTodo()">Add</button>
+      <button (click)="addOrUpdateTodo()">
+        {{ todoForm.value.id === -1 ? "Add" : "Update" }}
+      </button>
     </form>
   </div>
 </div>
